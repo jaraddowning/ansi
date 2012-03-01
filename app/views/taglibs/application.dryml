@@ -5,5 +5,95 @@
 <include src="taglibs/auto/rapid/cards"/>
 <include src="taglibs/auto/rapid/pages"/>
 <include src="taglibs/auto/rapid/forms"/>
+<include gem="hobo-jquery" />
 
 <set-theme name="clean"/>
+
+<!-- ======   jQuery breaks without this  ======  -->
+
+<def tag="annotate-tag">
+  <%= "<!-- json_annotation (#{attributes.to_json}); -->".html_safe %>
+</def>
+
+<extend tag="page">
+  <old-page merge without-live-search without-count>
+    <custom-scripts:>
+      <hjq-assets/>
+      <javascript name="ckeditor/ckeditor"/>
+      <javascript name="load_ckeditor"/>
+        <script type="text/javascript">
+          var last_added;
+          var last_removed;
+          function my_add_hook() {
+            last_added = this;
+          }
+          function my_remove_hook() {
+            last_removed = this;
+            return confirm("Confirm Removal");
+          }
+        </script>
+    </custom-scripts:>
+    <append-scripts:>
+    <%= raw "<!--[if lt IE 9]>" %> 
+      <javascript name="excanvas.compiled.js"/> 
+    <%= raw "<![endif]-->" %>
+    <%= raw "<!--[if lt IE 7]>" %> 
+      <javascript name="IE7.js"/>
+      <javascript name="ie7-recalc.js"/>
+    <%= raw "<![endif]-->" %>
+    </append-scripts:>
+    <footer:>
+      <div>
+        <a href="http://ansi.emaponline.org/privacy.html">EMAP Privacy Policy</a>&nbsp;
+        Copyright &#64; 2012 - EMAP
+      </div>
+    </footer:>
+  </old-page>
+</extend>
+
+<!-- ======   Sweet Date Picker  ====== -->
+
+<def tag="input" for="Date"> 
+  <hjq-datepicker changeYear="true" dateFormat="yy-mm-dd" maxDate="new Date(+0y)" minDate="new Date(-5y)" merge /> 
+</def>
+
+<!-- ======   Form layout  ====== -->
+
+<def tag="form" for="PropChange">
+  <form merge without-header>
+    <error-messages param/>
+    COMMENT FORM FOR THE EMERGENCY MANAGEMENT STANDARD BY EMAP 2013
+    FINAL DATE FOR RECIEPT OF COMMENTS: August 14, 2012
+    <field-list id="pick_date" fields="date"/>
+    <field-list id="contact" fields="name, phone, email"/>
+    Some text
+    <field-list id="company" fields="organization, address, city, state, zip"/>
+    Some different text
+    <field-list id="stdarea" fields="standard, standard_area">
+      <standard-area-view:>
+        <do part="standard-area-menu">
+          <if test="&@prop_change.standard">
+            <select-one options="&@prop_change.standard.standard_areas" />
+          </if>
+          <else>
+            <select disabled><option>First choose a Chapter</option></select>
+          </else>
+        </do>
+      </standard-area-view:>
+    </field-list>
+    <field-list id="comrec" fields="com_rec"/>
+    <field-list id="comment" fields="comment, support"/>
+    <h2>6. Copyright</h2>
+    <p><i>I agree that all comments and substantiation listed on the above form shall be considered property of the Emergency
+    Management Accreditation Program (EMAP) Technical Committee. To any extent that I retain rights to the above comments
+    and substantiation I grant and assign full rights in copyright to EMAP. I further agree that by submitting this comment form I
+    retain no rights to any publications by EMAP that may or may not use the above comments and substantiation and acknowledge
+    the right of EMAP to register copyright in its name.</i></p><br />
+    <field-list id="sigblock" fields="signature, rop_email"/>
+    Ending text
+    <h2>PLEASE USE A SEPERATE FORM FOR EACH COMMENT</h2>
+    <div param="actions">
+      <submit label="#{ht 'prop_change.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>    
+  </form>
+</def>

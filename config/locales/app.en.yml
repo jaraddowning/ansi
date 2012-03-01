@@ -8,18 +8,26 @@ en:
 #    created_at: Created at
 #    updated_at: Updated at
 #
-#  activerecord:
-#    models:
-#      user:
-#        one: User
-#        other: Users
-#    attributes:
-#      user:
-#        name: Name
-#        password: Password
-#        current_password: Current Password
-#        password_confirmation: Password Confirmation
-#        email_address: Email Address
-#    attribute_help:
-#      user:
-#        email_address: We will never share your address with third parties
+  activerecord:
+    models:
+      user:
+        one: User
+        other: Users
+    attributes:
+      prop_change:
+        name: Name
+        chapter: Standard Chapter
+        subchapter: Standard Subsection
+        com_rec: Comment Recommends
+        support: Support for Comment
+        rop_email: Reply to email address
+
+    attribute_help:
+      prop_change:
+        email: We will never share your address with third parties
+        com_rec: Select one
+        comment: (include proposed or revised wording; identify wording to be deleted) [For purposes of this form denote wording added by underlining and wording deleted by striking through]
+        support: (include reasoning behind comment as well as empirical evidence for changes where appropriate) [If the reasoning and evidence given is over 150 words it may be summarized for purposes of publication]
+        signature: By typing your name you are signing this form
+        rop_email: Enter the email address you would like the response to this comment sent.
+        

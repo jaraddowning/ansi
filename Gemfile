@@ -30,3 +30,5 @@ gem 'sqlite3'
 #   gem 'webrat'
 # end
 gem "hobo", "= 1.3.0"
+gem "hobo-jquery", :git => "git://github.com/bryanlarsen/hobo-jquery.git", :branch => "rails3"
+gem 'ruby-ntlm'

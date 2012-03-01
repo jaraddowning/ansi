@@ -41,5 +41,8 @@ module Ansi
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    # Configure system-wide application name
+    config.hobo.app_name = "Comment Form for the Emergency Management Standard by EMAP"
   end
 end

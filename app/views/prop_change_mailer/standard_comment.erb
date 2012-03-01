@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h3>The following information was submitted via the online comment form for the 2013 <i>Emergency Management Standard</i> by EMAP.</h3>
+    <p>
+      Date: <%= @date %><br />
+      Submitted by: <%= @name %><br />
+      Phone: <%= @phone %><br />
+      Organization: <%= @organization %><br />
+      Email: <%= @email %><br />
+      Address: <%= @address %><br />
+      City: <%= @city %><br />
+      State: <%= @state %><br />
+      Zip: <%= @zip %><br />
+
+      Chapter: <%= @standard %><br />
+      Subchapter: <%= @standard_area %><br />
+      Comment Recomends: <%= @com_rec %><br />
+    </p>
+    <p>
+      Comment:
+      <%= @comment.html_safe %><br /><br />
+      Support for comment:
+      <%= @support.html_safe %><br /><br />
+
+      Reply to email: <%= @rop_email %><br />
+    </p>
+    <p>
+      Thank you,<br />
+
+      The EMAP Technical Committee.<br /><br />
+      
+      ID#: <%= @id %>
+    </p>
+  </body>
+</html>

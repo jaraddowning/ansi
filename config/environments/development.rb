@@ -15,12 +15,29 @@ Ansi::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
+
+  # Email configuration for CSG Exchange Servers (requires ruby-ntlm gem)
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.default :content_type => "text/html"
+  config.action_mailer.smtp_settings = {
+    :address              => "mail.csg.org",
+    :port                 => 25,
+    :domain               => "csg.org",
+    :authentication       => :ntlm,
+    :user_name            => 'emap@csg.org',
+    :password             => 'Emap8222',
+    :enable_starttls_auto => false
+  }
+
 end
 
